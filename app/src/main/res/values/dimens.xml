@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="view_margin_default_size">10dp</dimen>
+    <dimen name="view_card_corner_default_size">10dp</dimen>
     <dimen name="layout_padding_default_size">15dp</dimen>
+    <dimen name="layout_card_corner_default_size">20dp</dimen>
 </resources>

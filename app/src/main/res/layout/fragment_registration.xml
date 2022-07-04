@@ -14,7 +14,7 @@
         app:cardBackgroundColor="@color/semitransparent"
         android:layout_margin="@dimen/view_margin_default_size"
         android:elevation="10dp"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="@dimen/layout_card_corner_default_size">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,7 +91,7 @@
                 android:clickable="true"
                 style="?android:textAppearanceSmall"
                 android:foreground="?android:selectableItemBackground"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="@dimen/view_card_corner_default_size"
                 app:cardBackgroundColor="@color/green_500"
                 android:focusable="true">
 

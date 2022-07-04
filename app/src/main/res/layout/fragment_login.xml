@@ -14,7 +14,7 @@
         app:cardBackgroundColor="@color/semitransparent"
         android:layout_margin="@dimen/view_margin_default_size"
         android:elevation="10dp"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="@dimen/layout_card_corner_default_size">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,6 +24,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/ic_email"
                 android:textColorHint="@color/white"
                 app:hintTextColor="@color/white"
                 app:counterTextColor="@color/white"
@@ -44,6 +45,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/ic_password"
                 android:textColorHint="@color/white"
                 app:hintTextColor="@color/white"
                 app:counterTextColor="@color/white"
@@ -71,7 +73,7 @@
                 android:clickable="true"
                 style="?android:textAppearanceSmall"
                 android:foreground="?android:selectableItemBackground"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="@dimen/view_card_corner_default_size"
                 app:cardBackgroundColor="@color/cyan_500"
                 android:focusable="true">
 
