@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/bgloginc"
+        android:duration="2000"/>
+    <item android:drawable="@drawable/bgloginb"
+        android:duration="2000"/>
+    <item android:drawable="@drawable/bglogina"
+        android:duration="2000"/>
+    <item android:drawable="@drawable/bglogind"
+        android:duration="2000"/>
+</animation-list>

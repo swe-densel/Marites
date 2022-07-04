@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">Marites</string>
     <string name="phone_number">Phone Number</string>
+    <string name="email">Email Address</string>
     <string name="password">Password</string>
+    <string name="Name">Name</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
+    <string name="register_now">Gusto mo sumali sa chika? \nSwipe left to register now.</string>
+    <string name="login_now">Itutuloy ba natin ang chika? \nSwipe right to login.</string>
+    <string name="search">Search ka-Chat</string>
 </resources>
