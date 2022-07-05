@@ -81,7 +81,31 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"/>
 
+
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/white"
+        app:hintTextColor="@color/white"
+        app:counterTextColor="@color/white"
+        app:boxStrokeColor="@color/white"
+        android:layout_margin="@dimen/view_margin_default_size">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tie_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Retype Password"
+            android:inputType="textPassword"
+            android:background="@color/transparent"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_register"
