@@ -21,8 +21,7 @@
             android:id="@+id/iv_contactPhoto"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/user"/>
+            android:layout_weight="1"/>
 
         <LinearLayout
             android:layout_width="0dp"
