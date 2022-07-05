@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "836409193606",
+    "firebase_url": "https://marites-dd8e7-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "marites-dd8e7",
+    "storage_bucket": "marites-dd8e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836409193606:android:e72a1b62bfa61a3ce00d07",
+        "android_client_info": {
+          "package_name": "ph.gcash.marites"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "836409193606-e3kb1i98acohko5n82skrmr9ju4vtb9g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXNBMFcrx_Iyd3SQpoCjhgtplldVuxLSY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "836409193606-e3kb1i98acohko5n82skrmr9ju4vtb9g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
