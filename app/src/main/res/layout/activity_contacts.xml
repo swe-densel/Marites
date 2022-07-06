@@ -46,8 +46,32 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_contacts"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/view_margin_default_size"/>
+        android:layout_width="389dp"
+        android:layout_height="505dp"
+        android:layout_margin="@dimen/view_margin_default_size" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_logout"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/view_margin_default_size"
+        android:text="LOGOUT"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:cornerRadius="@dimen/view_card_corner_default_size" />
+
+    <TextView
+
+        android:id="@+id/UserEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        android:text="user email"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
