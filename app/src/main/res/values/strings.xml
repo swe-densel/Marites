@@ -6,8 +6,13 @@
     <string name="confirm"> Retype Password</string>
     <string name="Name">Name</string>
     <string name="login">LOGIN</string>
+    <string name="logout">Logout</string>
     <string name="register">REGISTER</string>
+    <string name="contacts">Contacts</string>
+    <string name="viewProfile">View Profile</string>
+    <string name="aboutApp">About the App</string>
     <string name="register_now">Gusto mo sumali sa chika? \nSwipe left to register now.</string>
     <string name="login_now">Itutuloy ba natin ang chika? \nSwipe right to login.</string>
     <string name="search">Search ka-Chat</string>
+    <string name="message">Hello!</string>
 </resources>

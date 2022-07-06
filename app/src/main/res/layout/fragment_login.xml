@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/semitransparent_card_background"
+    android:background="@drawable/sh_loginbox_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/layout_padding_default_size"
@@ -64,10 +64,10 @@
         android:text="@string/login"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:drawableLeft="@drawable/ic_login"
         app:cornerRadius="@dimen/view_card_corner_default_size" />
 
     <TextView
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

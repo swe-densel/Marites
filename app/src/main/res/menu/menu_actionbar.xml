@@ -7,4 +7,9 @@
         android:icon="@drawable/ic_person_search"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.widget.SearchView" />
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/logout"
+        android:icon="@drawable/ic_logout"
+        app:showAsAction="ifRoom|collapseActionView"/>
 </menu>

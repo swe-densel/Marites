@@ -15,11 +15,8 @@ import ph.gcash.marites.databinding.FragmentLoginBinding
 import ph.gcash.marites.databinding.FragmentRegistrationBinding
 
 class RegistrationFragment : Fragment() {
-
     private lateinit var binding: FragmentRegistrationBinding
-
     private lateinit var firebaseAuth: FirebaseAuth
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +33,6 @@ class RegistrationFragment : Fragment() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-//        binding.textView.setOnClickListener {
-//            val intent = Intent(this.requireActivity().applicationContext, LoginFragment::class.java)
-//            startActivity(intent)
-//        }
         binding.btnRegister.setOnClickListener {
             val email = binding.tieEmail.text.toString()
             val pass = binding.tiePassword.text.toString()

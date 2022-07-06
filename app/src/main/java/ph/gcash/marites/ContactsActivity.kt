@@ -6,6 +6,12 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import ph.gcash.marites.databinding.ActivityContactsBinding
 import ph.gcash.marites.databinding.ActivityLoginBinding
 
@@ -19,8 +25,23 @@ class ContactsActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.tbApp)
 
-        val email = intent.getStringExtra("email")
-        Log.d(logger, "Email: $email")
+        getDataFromDatabase()
+    }
+
+    private fun getDataFromDatabase() {
+        val usersReference = Firebase.database.getReference("Users")
+        usersReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val value = snapshot.value
+                Log.d(logger, "DATA: $value")
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
