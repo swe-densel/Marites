@@ -15,9 +15,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import ph.gcash.marites.ContactsActivity
+import ph.gcash.marites.User
 import ph.gcash.marites.databinding.FragmentRegistrationBinding
 import java.util.*
 
@@ -56,15 +59,15 @@ class RegistrationFragment : Fragment() {
         binding.btnRegister.setOnClickListener {
             val email = binding.tieEmail.text.toString()
             val pass = binding.tiePassword.text.toString()
-            val FullName = binding.tieName.text.toString()
+            val fullName = binding.tieName.text.toString()
             val confirm = binding.tieConfirm.text.toString()
             val image = binding.profileImage.drawable
 
 
-            if (email.isNotEmpty() && pass.isNotEmpty() && FullName.isNotEmpty()) {
+            if (email.isNotEmpty() && pass.isNotEmpty() && fullName.isNotEmpty()) {
                 if (pass == confirm) {
 
-                    firebaseAuth.createUserWithEmailAndPassword(email, pass )
+                    firebaseAuth.createUserWithEmailAndPassword(email, pass)
                         .addOnCompleteListener {
                             if (it.isSuccessful && image != null) {
 
@@ -76,6 +79,11 @@ class RegistrationFragment : Fragment() {
                                 startActivity(intent)
 
                                 uploadImageToFirebaseStorage(firebaseAuth.currentUser!!.uid)
+
+                                writeDataBase(fullName,firebaseAuth.currentUser!!.uid  )
+
+
+
 
                             } else {
                                 Toast.makeText(
@@ -116,31 +124,40 @@ class RegistrationFragment : Fragment() {
             startActivityForResult(intent, 0)
         }
     }
-       override fun onActivityResult(requestCode: Int, resultCode: Int , data: Intent?){
-            super.onActivityResult(requestCode, resultCode, data)
 
-            if (data !=null){
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-                if(data.data != null){
-                    selectedImq=data.data!!
+        if (data != null) {
 
-                    binding.profileImage.setImageURI(selectedImq)
-                }
+            if (data.data != null) {
+                selectedImq = data.data!!
+
+                binding.profileImage.setImageURI(selectedImq)
             }
-
-
-           }
-            private fun uploadImageToFirebaseStorage(uid : String){
-//               val filename = UUID.randomUUID().toString()
-                val filename = uid
-                val ref = FirebaseStorage.getInstance().getReference("users/uid/$filename")
-
-                ref.putFile(selectedImq)
-
         }
 
-    // function to write user database
+
     }
+
+    private fun uploadImageToFirebaseStorage(uid: String) {
+//               val filename = UUID.randomUUID().toString()
+        val filename = uid
+        val ref = FirebaseStorage.getInstance().getReference("users/$filename")
+
+        ref.putFile(selectedImq)
+
+    }
+
+    // function to write user database
+
+    private fun writeDataBase(name : String , userUID : String) {
+        val database = Firebase.database
+        val userRef = database.getReference("Users")
+        val user = User(name, userUID)
+        userRef.child(userUID).setValue(user)
+    }
+}
 
 
 

@@ -6,9 +6,10 @@
         <entry key="app/src/main/res/drawable/semitransparent_card_background.xml" value="0.333" />
         <entry key="app/src/main/res/drawable/slideshow.xml" value="0.1755" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.33177083333333335" />
-        <entry key="app/src/main/res/layout/activity_contacts.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/activity_contacts.xml" value="0.21176470588235294" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/activity_sign_out.xml" value="0.2791666666666667" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="app/src/main/res/layout/content_contacts.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.37604166666666666" />
