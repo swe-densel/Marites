@@ -23,6 +23,7 @@ import com.squareup.picasso.Picasso
 import ph.gcash.marites.databinding.ActivityContactsBinding
 import ph.gcash.marites.login.LoginActivity
 import ph.gcash.marites.login.adapter.ContactsAdapter
+import ph.gcash.marites.login.model.User
 
 class ContactsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityContactsBinding

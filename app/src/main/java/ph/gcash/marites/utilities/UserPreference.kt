@@ -8,6 +8,7 @@ object UserPreference {
     val userUID = "USER_UID"
     val userName = "USER_NAME"
     val userEmail = "USER_EMAIL"
+    val userContact = "HAS_CONTACT"
 
     fun getUserPreference(context: Context, prefkey: String):
             SharedPreferences = context
@@ -58,6 +59,14 @@ object UserPreference {
         set(value) {
             editor {
                 it.putString(userEmail, value)
+            }
+        }
+
+    var SharedPreferences.contact
+        get() = getBoolean(userContact, false)
+        set(value) {
+            editor {
+                it.putBoolean(userContact, value)
             }
         }
 

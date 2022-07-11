@@ -75,8 +75,8 @@ class FirebaseMessageAdapter(private val context: Context,
                 val newImageView = ImageView(context)
                 val imageURL = FirebaseStorage
                     .getInstance()
-                    .reference
-                    .child(data.imageUrl).downloadUrl
+                    .getReference(data.imageUrl)
+                    .downloadUrl
                 imageURL.loadIntoPicasso(newImageView)
                 itemMessageBinding.flMessageContent.addView(newImageView)
             }
