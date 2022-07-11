@@ -6,6 +6,8 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.1955420466058764" />
         <entry key="app/src/main/res/drawable/card_background.xml" value="0.2815" />
         <entry key="app/src/main/res/drawable/edittext_background.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable/ic_cardbg.xml" value="0.1945" />
+        <entry key="app/src/main/res/drawable/ic_contacts.xml" value="0.1945" />
         <entry key="app/src/main/res/drawable/ic_email.xml" value="0.2815" />
         <entry key="app/src/main/res/drawable/ic_person.xml" value="0.2815" />
         <entry key="app/src/main/res/drawable/ic_person_medium.xml" value="0.2815" />
@@ -14,6 +16,7 @@
         <entry key="app/src/main/res/drawable/ic_text.xml" value="0.157" />
         <entry key="app/src/main/res/drawable/loginbox_background.xml" value="0.2815" />
         <entry key="app/src/main/res/drawable/semitransparent_card_background.xml" value="0.333" />
+        <entry key="app/src/main/res/drawable/sh_cardbg.xml" value="0.1945" />
         <entry key="app/src/main/res/drawable/sh_edittext_background.xml" value="0.2815" />
         <entry key="app/src/main/res/drawable/sh_left_message_background.xml" value="0.2815" />
         <entry key="app/src/main/res/drawable/sh_loginbox_background.xml" value="0.2815" />
@@ -26,6 +29,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.28940217391304346" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/contact_item.xml" value="0.3029891304347826" />
         <entry key="app/src/main/res/layout/content_contacts.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_contacts.xml" value="0.2857789855072464" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.37604166666666666" />

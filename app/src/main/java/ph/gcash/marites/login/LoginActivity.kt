@@ -1,5 +1,6 @@
 package ph.gcash.marites.login
 
+import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ph.gcash.marites.R
@@ -20,6 +21,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.llLoginBg.setBackgroundResource(R.drawable.slideshow)
+        val animationDrawable: AnimationDrawable =
+            binding.llLoginBg.background as AnimationDrawable
+        animationDrawable.start()
 
         prefKey = resources.getString(R.string.app_id)
         loginFragment = LoginFragment(prefKey)

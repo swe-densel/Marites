@@ -20,21 +20,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_message"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/message"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="21sp"/>-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_imgMessage"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:src="@drawable/ic_person_medium"/>-->
-
         <TextView
             android:id="@+id/tv_timestamp"
             android:layout_width="wrap_content"
