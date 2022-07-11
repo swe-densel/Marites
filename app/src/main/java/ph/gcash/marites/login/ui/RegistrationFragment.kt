@@ -1,28 +1,21 @@
 package ph.gcash.marites.login.ui
 
-import android.app.Activity
-import android.content.ContentResolver
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import ph.gcash.marites.ContactsActivity
 import ph.gcash.marites.User
 import ph.gcash.marites.databinding.FragmentRegistrationBinding
-import java.util.*
 
 class RegistrationFragment : Fragment() {
     private lateinit var binding: FragmentRegistrationBinding
@@ -80,7 +73,7 @@ class RegistrationFragment : Fragment() {
 
                                 uploadImageToFirebaseStorage(firebaseAuth.currentUser!!.uid)
 
-                                writeDataBase(fullName,firebaseAuth.currentUser!!.uid  )
+                                writeDataBase(fullName,firebaseAuth.currentUser!!.uid , "anystring")
 
 
 
@@ -151,10 +144,10 @@ class RegistrationFragment : Fragment() {
 
     // function to write user database
 
-    private fun writeDataBase(name : String , userUID : String) {
+    private fun writeDataBase(name : String , userUID : String , email: String) {
         val database = Firebase.database
         val userRef = database.getReference("Users")
-        val user = User(name, userUID)
+        val user = User(name, userUID , email)
         userRef.child(userUID).setValue(user)
     }
 }

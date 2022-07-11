@@ -24,6 +24,7 @@
         android:orientation="horizontal">
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
@@ -48,7 +49,9 @@
         android:id="@+id/rv_contacts"
         android:layout_width="389dp"
         android:layout_height="505dp"
-        android:layout_margin="@dimen/view_margin_default_size" />
+        android:layout_margin="@dimen/view_margin_default_size"
+        tools:listitem="@layout/contact_item"
+        />
     
 
 </LinearLayout>
