@@ -47,7 +47,6 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.tbContact)
 
         //get current user of the app
         currentUser = getCurrentUser()
@@ -58,6 +57,9 @@ class ChatActivity : AppCompatActivity() {
         userToChat = User("Second User", "secondUser@email.com", "another_random_id2")
         roomID = ""
         //ONLY USED FOR TESTING
+
+        binding.tvChatName.text = userToChat.name
+        binding.ivBack.setOnClickListener { finish() }
 
         firebaseDatabase = FirebaseDatabase.getInstance()
 
