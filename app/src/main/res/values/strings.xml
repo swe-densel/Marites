@@ -15,4 +15,5 @@
     <string name="login_now">Itutuloy ba natin ang chika? \nSwipe right to login.</string>
     <string name="search">Search ka-Chat</string>
     <string name="message">Hello!</string>
+    <string name="app_id">ph.gcash.marites</string>
 </resources>
