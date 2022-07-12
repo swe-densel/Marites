@@ -2,6 +2,7 @@ package ph.gcash.marites.login.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,30 +14,28 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import ph.gcash.marites.ContactsActivity
 import ph.gcash.marites.databinding.FragmentLoginBinding
 import ph.gcash.marites.login.model.User
 import ph.gcash.marites.login.model.UserPayload
+import ph.gcash.marites.main.MainActivity
 import ph.gcash.marites.utilities.UserPreference
-import ph.gcash.marites.utilities.UserPreference.email
-import ph.gcash.marites.utilities.UserPreference.name
-import ph.gcash.marites.utilities.UserPreference.uid
+import ph.gcash.marites.utilities.UserPreference.user
 
 class LoginFragment(val prefKey: String) : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
-    override fun onStart() {
-        super.onStart()
-
-        if(firebaseAuth.currentUser != null){
-            val intent = Intent(
-                this.requireActivity().applicationContext,
-                ContactsActivity::class.java
-            )
-            startActivity(intent)
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//
+//        if(firebaseAuth.currentUser != null){
+//            val intent = Intent(
+//                this.requireActivity().applicationContext,
+//                MainActivity::class.java
+//            )
+//            startActivity(intent)
+//        }
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +52,10 @@ class LoginFragment(val prefKey: String) : Fragment() {
         binding.btnLogin.setOnClickListener {
             val email = binding.tieEmail.text.toString()
             val password = binding.tiePassword.text.toString()
-
-            val loginUser = User(email, password)
+            Log.d("LoginFragment",password)
+            val loginUser = User()
+            loginUser.email = email
+            loginUser.password = password
             val areFieldsValid = checkLoginFields(loginUser)
 
             if (areFieldsValid) {
@@ -70,11 +71,7 @@ class LoginFragment(val prefKey: String) : Fragment() {
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     getUserDataFromDatabase(firebaseAuth.currentUser!!.uid)
-                    val goToContactsActivity = Intent(
-                        this.requireActivity().applicationContext,
-                        ContactsActivity::class.java)
-                    startActivity(goToContactsActivity)
-                    this.requireActivity().finish()
+
 
                 } else {
                     Toast.makeText(
@@ -83,7 +80,7 @@ class LoginFragment(val prefKey: String) : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-        }
+                }
     }
 
     private fun checkLoginFields(loginUser: User): Boolean {
@@ -112,7 +109,17 @@ class LoginFragment(val prefKey: String) : Fragment() {
         usersReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val userPayload = snapshot.getValue(UserPayload::class.java)
-                userPayload?.let { saveUserToPref(it) }
+                userPayload?.let {
+
+                    saveUserToPref(it)
+
+                    val goToMainActivity = Intent(
+                        this@LoginFragment.requireActivity().applicationContext,
+                        MainActivity::class.java)
+                    startActivity(goToMainActivity)
+                    this@LoginFragment.requireActivity().finish()
+
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -129,8 +136,9 @@ class LoginFragment(val prefKey: String) : Fragment() {
         val userPref = UserPreference.getUserPreference(
             this.requireActivity().applicationContext, prefKey
         )
-        userPref.name = loginUser.name
-        userPref.uid = loginUser.userUID
-        userPref.email = loginUser.email
+        userPref.user = User(name = loginUser.name!!,
+                        email = loginUser.email!!,
+                        userUID = loginUser.userUID!!)
+
     }
 }

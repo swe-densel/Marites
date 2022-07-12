@@ -19,7 +19,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import ph.gcash.marites.databinding.ActivityContactsBinding
 import ph.gcash.marites.login.LoginActivity
-import ph.gcash.marites.login.adapter.ContactsAdapter
 import ph.gcash.marites.login.model.User
 import ph.gcash.marites.utilities.UserPreference
 import ph.gcash.marites.utilities.UserPreference.user
@@ -71,7 +70,7 @@ class ContactsActivity : AppCompatActivity() {
                         userArrayList.add(user!!)
                     }
 
-                    userRecyclerView.adapter = ContactsAdapter(userArrayList)
+//                    userRecyclerView.adapter = ContactsAdapter(userArrayList)
                 }
 
 

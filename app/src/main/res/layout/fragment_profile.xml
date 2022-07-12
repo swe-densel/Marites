@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:elevation="10dp"
-    tools:context=".login.ui.ProfileFragment">
+    tools:context=".main.ui.ProfileFragment">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profile_image"

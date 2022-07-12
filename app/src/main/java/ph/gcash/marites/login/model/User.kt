@@ -1,14 +1,17 @@
 package ph.gcash.marites.login.model
 
 import android.graphics.drawable.Drawable
+import java.io.Serializable
 
-class User () {
+class User () : Serializable {
     var name : String = ""
     var email : String = ""
     var password : String = ""
     var confirmPassword : String = ""
     var userUID : String = ""
     var image : Drawable? = null
+
+
 
     constructor(name: String, email: String) : this() {
         this.name = name

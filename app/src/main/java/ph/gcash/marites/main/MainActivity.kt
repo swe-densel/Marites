@@ -1,12 +1,12 @@
 package ph.gcash.marites.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ph.gcash.marites.R
 import ph.gcash.marites.databinding.ActivityMainBinding
+import ph.gcash.marites.main.ui.AboutFragment
 import ph.gcash.marites.main.ui.ContactsFragment
-import ph.gcash.marites.main.ui.InfoFragment
 import ph.gcash.marites.main.ui.ProfileFragment
 import ph.gcash.marites.main.ui.SearchFragment
 
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.item_info -> {
-                    loadFragment(InfoFragment())
+                    loadFragment(AboutFragment())
                     true
                 }
                 else -> {
