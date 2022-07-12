@@ -3,11 +3,13 @@ package ph.gcash.marites.chat
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
@@ -29,7 +31,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var firebaseStorage: FirebaseStorage
     private lateinit var messageReference: DatabaseReference
-
+    private lateinit var tts: TextToSpeech
     private lateinit var currentUser: User
     private lateinit var userToChat: User
     private lateinit var roomID: String
@@ -223,4 +225,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+
+
+
 }

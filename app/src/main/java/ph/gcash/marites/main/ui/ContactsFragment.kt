@@ -9,8 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.tasks.Task
-import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,14 +17,13 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.squareup.picasso.Picasso
 import ph.gcash.marites.R
 import ph.gcash.marites.databinding.FragmentContactsBinding
 import ph.gcash.marites.login.LoginActivity
 import ph.gcash.marites.login.adapter.ContactsAdapter
 import ph.gcash.marites.login.model.User
 import ph.gcash.marites.utilities.UserPreference
-import ph.gcash.marites.utilities.UserPreference.user
+import ph.gcash.marites.utilities.UserPreference.uid
 
 class ContactsFragment : Fragment() {
     private lateinit var binding: FragmentContactsBinding
@@ -54,25 +51,13 @@ class ContactsFragment : Fragment() {
         userRecyclerView.setHasFixedSize(true)
         userArrayList = ArrayList<User>()
 
-        fetchUserData()
         getDataFromDatabase()
     }
 
 
-    private fun fetchUserData() {
-        val user = UserPreference.getUserPreference(this.requireActivity().applicationContext, getString(R.string.app_id)).user
-        val imageURL = FirebaseStorage.getInstance().reference.child("users/${user.userUID}").downloadUrl
-        imageURL.loadIntoPicasso(binding.profilePicture)
-    }
-
-    fun Task<Uri>.loadIntoPicasso(imageView: ShapeableImageView) {
-        addOnSuccessListener {
-            Picasso.get().load(it).resize(300, 300).centerInside().into(imageView)
-        }
-    }
-
     private fun getDataFromDatabase() {
-        val usersReference = Firebase.database.getReference("Users")
+        val userId = UserPreference.getUserPreference(this.requireActivity().applicationContext,getString(R.string.app_id)).uid
+        val usersReference = Firebase.database.getReference("Contacts").child(userId!!)
         usersReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 

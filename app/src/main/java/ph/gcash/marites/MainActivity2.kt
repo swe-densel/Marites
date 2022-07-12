@@ -2,7 +2,6 @@ package ph.gcash.marites
 
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -44,7 +43,7 @@ class MainActivity2 : AppCompatActivity() {
             TextToSpeech.OnInitListener { status ->
                 // set our locale only if init was success.
                 if (status == TextToSpeech.SUCCESS) {
-                    textToSpeechEngine.language = Locale.UK
+                    textToSpeechEngine.language = Locale.CANADA
                 }
             })
     }

@@ -8,12 +8,13 @@
     android:orientation="vertical"
     android:gravity="center"
     android:elevation="10dp"
+    android:layout_margin="10dp"
     tools:context=".main.ui.ProfileFragment">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profile_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
         android:background="@color/cyan_500"
         android:padding="5dp"
         android:src="@drawable/ic_person"
@@ -30,8 +31,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="UUID: "
-            android:textColor="@color/white"
+            android:text="ID: "
+            android:textColor="@color/cyan_200"
             android:textSize="26sp"
             android:textStyle="bold"/>
 
@@ -55,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Full Name: "
-            android:textColor="@color/white"
+            android:textColor="@color/cyan_200"
             android:textSize="26sp"
             android:textStyle="bold"/>
 
@@ -81,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email Address: "
-            android:textColor="@color/white"
+            android:textColor="@color/cyan_200"
             android:textSize="26sp"
             android:textStyle="bold" />
 

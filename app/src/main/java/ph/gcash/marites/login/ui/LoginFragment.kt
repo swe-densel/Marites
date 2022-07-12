@@ -25,17 +25,17 @@ class LoginFragment(val prefKey: String) : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
-//    override fun onStart() {
-//        super.onStart()
-//
-//        if(firebaseAuth.currentUser != null){
-//            val intent = Intent(
-//                this.requireActivity().applicationContext,
-//                MainActivity::class.java
-//            )
-//            startActivity(intent)
-//        }
-//    }
+    override fun onStart() {
+        super.onStart()
+
+        if(firebaseAuth.currentUser != null){
+            val intent = Intent(
+                this.requireActivity().applicationContext,
+                MainActivity::class.java
+            )
+            startActivity(intent)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

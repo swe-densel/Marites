@@ -3,8 +3,10 @@ package ph.gcash.marites.chat.adapter
 import android.content.Context
 import android.graphics.Color
 import android.net.Uri
+import android.speech.tts.TextToSpeech
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,6 +20,7 @@ import com.squareup.picasso.Picasso
 import ph.gcash.marites.R
 import ph.gcash.marites.chat.model.MessagePayload
 import ph.gcash.marites.databinding.ItemMessageBinding
+import java.util.*
 
 class FirebaseMessageAdapter(private val context: Context,
                              private val myUID: String,
@@ -68,8 +71,20 @@ class FirebaseMessageAdapter(private val context: Context,
                 newTextView.text = data.message
                 newTextView.textSize = 21f
                 newTextView.setTextColor(Color.BLACK)
+                newTextView.setOnLongClickListener(object : View.OnLongClickListener {
+                    override fun onLongClick(v: View?): Boolean {
+                        speakOut(data.message)
+                        return true
+                    }
+
+                })
+
+
                 itemMessageBinding.flMessageContent.addView(newTextView)
+
             }
+
+
 
             if (data.imageUrl != "") {
                 val newImageView = ImageView(context)
@@ -83,6 +98,26 @@ class FirebaseMessageAdapter(private val context: Context,
 
             itemMessageBinding.tvTimestamp.text = data.timestamp
         }
+    }
+
+    private val textToSpeechEngine: TextToSpeech by lazy {
+        // Pass in context and the listener.
+        TextToSpeech(context,
+            TextToSpeech.OnInitListener { status ->
+                // set our locale only if init was success.
+                if (status == TextToSpeech.SUCCESS) {
+                    textToSpeechEngine.language = Locale.CANADA
+                }
+            })
+    }
+
+    private fun speakOut(data: String) {
+        textToSpeechEngine.speak(
+            data,
+            TextToSpeech.QUEUE_FLUSH,
+            null,
+            "tts1"
+        )
     }
 
 }
@@ -99,3 +134,5 @@ fun Task<Uri>.loadIntoPicasso(imageView: ImageView){
         Picasso.get().load(it).resize(600, 600).centerInside().into(imageView)
     }
 }
+
+
