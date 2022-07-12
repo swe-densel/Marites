@@ -3,28 +3,47 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../../../layout/custom_preview.xml" value="0.11217625294315506" />
+        <entry key="../../../../layout/custom_preview.xml" value="0.1955420466058764" />
+        <entry key="app/src/main/res/drawable/card_background.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable/edittext_background.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable/ic_cardbg.xml" value="0.1945" />
+        <entry key="app/src/main/res/drawable/ic_contacts.xml" value="0.1945" />
+        <entry key="app/src/main/res/drawable/ic_email.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable/ic_person.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable/ic_person_medium.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable/ic_person_search.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/ic_text.xml" value="0.157" />
+        <entry key="app/src/main/res/drawable/loginbox_background.xml" value="0.2815" />
         <entry key="app/src/main/res/drawable/semitransparent_card_background.xml" value="0.333" />
+        <entry key="app/src/main/res/drawable/sh_cardbg.xml" value="0.1945" />
+        <entry key="app/src/main/res/drawable/sh_edittext_background.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable/sh_left_message_background.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable/sh_loginbox_background.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable/sh_message_background.xml" value="0.2815" />
         <entry key="app/src/main/res/drawable/slideshow.xml" value="0.1755" />
-        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.33177083333333335" />
-        <entry key="app/src/main/res/layout/activity_contacts.xml" value="0.21176470588235294" />
+        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_contacts.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/activity_crop_image.xml" value="0.24094202898550723" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.37604166666666666" />
-        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.34782608695652173" />
-        <entry key="app/src/main/res/layout/activity_sign_out.xml" value="0.2791666666666667" />
-        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_textto_speech.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/contact_item.xml" value="0.2708333333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.28940217391304346" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/contact_item.xml" value="0.3029891304347826" />
         <entry key="app/src/main/res/layout/content_contacts.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_contacts.xml" value="0.2857789855072464" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.37604166666666666" />
-        <entry key="app/src/main/res/layout/fragment_info.xml" value="0.3072916666666667" />
+        <entry key="app/src/main/res/layout/fragment_info.xml" value="0.2857789855072464" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.33242753623188404" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.33541666666666664" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2857789855072464" />
         <entry key="app/src/main/res/layout/fragment_registration.xml" value="0.3619791666666667" />
-        <entry key="app/src/main/res/layout/item_contact.xml" value="0.3307291666666667" />
-        <entry key="app/src/main/res/layout/item_left_message.xml" value="0.2708333333333333" />
-        <entry key="app/src/main/res/layout/item_right_message.xml" value="0.2708333333333333" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.2857789855072464" />
+        <entry key="app/src/main/res/layout/item_contact.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_left_message.xml" value="0.3307291666666667" />
+        <entry key="app/src/main/res/layout/item_message.xml" value="0.3307291666666667" />
+        <entry key="app/src/main/res/layout/item_right_message.xml" value="0.33177083333333335" />
         <entry key="app/src/main/res/menu/menu_actionbar.xml" value="0.375" />
+        <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.33177083333333335" />
       </map>
     </option>
   </component>

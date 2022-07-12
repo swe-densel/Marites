@@ -11,7 +11,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import ph.gcash.marites.R
-import ph.gcash.marites.User
+import ph.gcash.marites.login.model.User
 
 class ContactsAdapter(private val userList : ArrayList<User>): RecyclerView.Adapter<ContactsAdapter.myViewHolder>() {
 

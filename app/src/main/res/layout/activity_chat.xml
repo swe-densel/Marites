@@ -6,91 +6,48 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    tools:context=".ChatActivity">
+    tools:context=".chat.ChatActivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <LinearLayout
         android:id="@+id/tb_contact"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        android:layout_weight="0.0001"
+        android:background="@color/cyan_500"
+        android:weightSum="5"
+        android:orientation="horizontal">
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.9999"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/view_margin_default_size">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_margin="@dimen/view_margin_default_size"
+            android:background="@color/cyan_500"
+            android:layout_weight="0.5"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            android:src="@drawable/ic_arrow_back"/>
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/view_margin_default_size"
-                android:background="@drawable/sh_right_message_background">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/message"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="July 6, 2022 12:00:00"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"/>
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/view_margin_default_size"
-                android:background="@drawable/sh_left_message_background">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/message"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="July 6, 2022 12:00:00"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"/>
-            </LinearLayout>
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_chatName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:layout_margin="@dimen/view_margin_default_size"
+            android:gravity="center_vertical"
+            android:text="Full Name"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/rv_messages"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_weight="0.9999"-->
-<!--        android:layout_margin="@dimen/view_margin_default_size"/>-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_messages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.9999"
+        android:layout_margin="@dimen/view_margin_default_size"/>
 
     <LinearLayout
         android:id="@+id/lv_bottombar"
@@ -102,6 +59,7 @@
         android:background="@color/green_500">
 
         <ImageView
+            android:id="@+id/iv_uploadImg"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/view_margin_default_size"
@@ -109,16 +67,19 @@
             android:src="@drawable/ic_add_photo"/>
 
         <EditText
+            android:id="@+id/et_message"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/view_margin_default_size"
             android:padding="10dp"
-            android:background="@drawable/sh_edittext_background"
+            android:background="@drawable/sh_messagebox_background"
             android:hint="@string/message"
             android:textColorHint="@color/gray_700"
+            android:textColor="@color/black"
             android:layout_weight="4"/>
 
         <ImageView
+            android:id="@+id/iv_send"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/view_margin_default_size"
@@ -126,7 +87,6 @@
             android:layout_weight="0.5"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             android:src="@drawable/ic_send"/>
-
 
     </LinearLayout>
 

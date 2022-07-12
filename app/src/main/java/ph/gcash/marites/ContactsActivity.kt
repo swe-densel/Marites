@@ -3,9 +3,6 @@ package ph.gcash.marites
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +20,9 @@ import com.squareup.picasso.Picasso
 import ph.gcash.marites.databinding.ActivityContactsBinding
 import ph.gcash.marites.login.LoginActivity
 import ph.gcash.marites.login.adapter.ContactsAdapter
+import ph.gcash.marites.login.model.User
+import ph.gcash.marites.utilities.UserPreference
+import ph.gcash.marites.utilities.UserPreference.user
 
 class ContactsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityContactsBinding
@@ -38,31 +38,20 @@ class ContactsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.tbApp)
         userRecyclerView = findViewById(R.id.rv_contacts)
         userRecyclerView.layoutManager = LinearLayoutManager(this)
         userRecyclerView.setHasFixedSize(true)
         userArrayList = ArrayList<User>()
 
-
-
-        fetchData()
-
-
-
+        fetchUserData()
         getDataFromDatabase()
     }
 
-
-    private fun fetchData() {
-        val userID = FirebaseAuth.getInstance().currentUser!!.uid
-        val imageURL = FirebaseStorage.getInstance().reference.child("users/$userID").downloadUrl
-
+    private fun fetchUserData() {
+        val user = UserPreference.getUserPreference(this, getString(R.string.app_id)).user
+        val imageURL = FirebaseStorage.getInstance().reference.child("users/${user.userUID}").downloadUrl
         imageURL.loadIntoPicasso(binding.profilePicture)
-
-
-
-        }
+    }
 
     fun Task<Uri>.loadIntoPicasso(imageView: ShapeableImageView) {
         addOnSuccessListener {
@@ -85,8 +74,6 @@ class ContactsActivity : AppCompatActivity() {
                     userRecyclerView.adapter = ContactsAdapter(userArrayList)
                 }
 
-//                val value = snapshot.value
-//                Log.d(logger, "DATA: $value")
 
             }
 
@@ -97,39 +84,14 @@ class ContactsActivity : AppCompatActivity() {
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_actionbar, menu)
-        val searchItem = menu?.findItem(R.id.action_search)
-        val logoutItem = menu?.findItem(R.id.action_logout)
+    private fun signOutUser() {
+        UserPreference.clearPrefs(this, getString(R.string.app_id))
+        FirebaseAuth.getInstance().signOut()
 
-
-        val searchView = searchItem?.actionView as SearchView
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                TODO("Not yet implemented")
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                TODO("Not yet implemented")
-            }
-
-
-        })
-        logoutItem!!.setOnMenuItemClickListener(object : MenuItem.OnMenuItemClickListener {
-            override fun onMenuItemClick(item: MenuItem?): Boolean {
-                FirebaseAuth.getInstance().signOut()
-
-                val goToLoginActivity = Intent(this@ContactsActivity,LoginActivity::class.java)
-                startActivity(goToLoginActivity)
-                finish()
-                return true
-            }
-        })
-
-
-        return super.onCreateOptionsMenu(menu)
+        val goToLoginActivity = Intent(this@ContactsActivity,LoginActivity::class.java)
+        startActivity(goToLoginActivity)
+        finish()
     }
-
 
 }
 

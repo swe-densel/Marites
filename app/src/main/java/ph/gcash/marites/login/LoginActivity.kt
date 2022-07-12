@@ -1,8 +1,8 @@
 package ph.gcash.marites.login
 
+import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.ItemTouchHelper
 import ph.gcash.marites.R
 import ph.gcash.marites.databinding.ActivityLoginBinding
 import ph.gcash.marites.login.adapter.LoginAdapter
@@ -11,15 +11,25 @@ import ph.gcash.marites.login.ui.RegistrationFragment
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var prefKey: String
 
-    private val loginFragment = LoginFragment()
-    private val registrationFragment = RegistrationFragment()
+    private lateinit var loginFragment: LoginFragment
+    private lateinit var registrationFragment: RegistrationFragment
     private lateinit var loginAdapter: LoginAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.llLoginBg.setBackgroundResource(R.drawable.slideshow)
+        val animationDrawable: AnimationDrawable =
+            binding.llLoginBg.background as AnimationDrawable
+        animationDrawable.start()
+
+        prefKey = resources.getString(R.string.app_id)
+        loginFragment = LoginFragment(prefKey)
+        registrationFragment = RegistrationFragment(prefKey)
 
         initFragments()
     }
