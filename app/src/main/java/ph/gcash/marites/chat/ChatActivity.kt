@@ -4,10 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,23 +13,24 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import ph.gcash.marites.R
 import ph.gcash.marites.chat.adapter.FirebaseMessageAdapter
-import ph.gcash.marites.chat.model.ContactPayload
-import ph.gcash.marites.chat.model.MessagePayload
+import ph.gcash.marites.models.ContactPayload
+import ph.gcash.marites.models.MessagePayload
 import ph.gcash.marites.databinding.ActivityChatBinding
-import ph.gcash.marites.login.model.User
+import ph.gcash.marites.models.User
+import ph.gcash.marites.utilities.EpochGenerator
+import ph.gcash.marites.utilities.TimestampGenerator
+import ph.gcash.marites.utilities.UUIDGenerator
 import ph.gcash.marites.utilities.UserPreference
 import ph.gcash.marites.utilities.UserPreference.user
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 class ChatActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityChatBinding
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var firebaseStorage: FirebaseStorage
     private lateinit var messageReference: DatabaseReference
-    private lateinit var tts: TextToSpeech
     private lateinit var currentUser: User
     private lateinit var userToChat: User
     private lateinit var roomID: String
@@ -46,49 +45,33 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //get current user of the app
-        currentUser = getCurrentUser()
-        Log.d(logger, "${currentUser.userUID}, ${currentUser.name}, ${currentUser.email}")
-
-        //user to chat object (this is provided by SearchFragment)
-        //ONLY USED FOR TESTING
-        userToChat = User("Second User", "secondUser@email.com", "another_random_id2")
-        roomID = ""
-        //ONLY USED FOR TESTING
-
-        binding.tvChatName.text = userToChat.name
-
-
         initFirebase()
+        initUsers()
+        bindViews()
+    }
 
-        //check if contact exists in database
-        checkExistingContact()
-
+    private fun bindViews() {
+        binding.tvChatName.text = userToChat.name
         binding.ivBack.setOnClickListener(this)
         binding.ivSend.setOnClickListener(this)
         binding.ivUploadImg.setOnClickListener(this)
     }
 
-    private fun checkExistingContact() {
-        firebaseDatabase
-            .getReference("Contacts/${currentUser.userUID}/${userToChat.userUID}")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        hasContact = true
-                        roomID = snapshot.child("roomID").getValue(String::class.java)!!
-                        getDataFromDatabase()
-                    } else {
-                        hasContact = false
-                    }
-                    Log.d(logger, "hasContact = $hasContact")
-                }
+    private fun initUsers() {
+        //get current user of the app
+        currentUser = getCurrentUser()
 
-                override fun onCancelled(error: DatabaseError) {
-                    Log.d(logger, "ERROR: ${error.toException()}")
-                }
+        //user to chat object (this is provided by SearchFragment)
+        userToChat = intent.extras?.getSerializable("ChatUser") as User
 
-            })
+        //check if contact exists in database
+        checkExistingContact()
+    }
+
+    private fun getCurrentUser(): User {
+        return UserPreference
+            .getUserPreference(this, getString(R.string.app_id))
+            .user
     }
 
     private fun initFirebase() {
@@ -96,24 +79,47 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         firebaseStorage = FirebaseStorage.getInstance()
     }
 
-    private fun getCurrentUser(): User {
-        val userPref = getCurrentPreference()
+    /**
+     checkExistingContact() - checks if the user to chat has an entry under the
+        current user's contacts in the Realtime Database.
 
-        //ONLY USED FOR TESTING
-        userPref.user = User(
-            "First Last",
-            "firstLast@email.com",
-        "some_random_id")
-        //ONLY USED FOR TESTING
+        IF EXISTING: gets the roomID value to be use for referencing the Chatrooms node in the
+            Realtime Database
 
-        return userPref.user
+     **/
+    private fun checkExistingContact() {
+        val contactPath = "Contacts/${currentUser.userUID}/${userToChat.userUID}"
+
+        firebaseDatabase
+            .getReference(contactPath)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        hasContact = true
+                        roomID = snapshot.child("roomID").getValue(String::class.java)!!
+                        getChatroomMessages()
+                    } else {
+                        hasContact = false
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.d(logger, "ERROR: ${error.toException()}")
+                }
+            })
     }
 
-    private fun getCurrentPreference() = UserPreference
-        .getUserPreference(this, getString(R.string.app_id))
+    private fun getChatroomMessages() {
+        setMessageReference()
+        initRVAdapter().startListening()
+    }
 
-    private fun getDataFromDatabase() {
-        messageReference = firebaseDatabase.getReference("Chatrooms").child(roomID)
+    private fun setMessageReference() {
+        val roomPath = "Chatrooms/$roomID"
+        messageReference = firebaseDatabase.getReference(roomPath)
+    }
+
+    private fun initRVAdapter(): FirebaseMessageAdapter {
         messageAdapter = FirebaseMessageAdapter(
             this,
             currentUser.userUID,
@@ -127,16 +133,62 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         )
         binding.rvMessages.adapter = messageAdapter
         binding.rvMessages.setHasFixedSize(true)
-
-        messageAdapter.startListening()
+        return messageAdapter
     }
 
     private fun saveMessageToDatabase(
         messagePayload: MessagePayload
     ) {
         messageReference
-            .child(Instant.now().toEpochMilli().toString())
+            .child(EpochGenerator.generateString())
             .setValue(messagePayload)
+    }
+
+    private fun saveImageToStorage(imgData: Uri) {
+        val timestampEpoch = Instant.now().toEpochMilli().toString()
+        val directory = "images/$timestampEpoch.jpg"
+
+        if (!hasContact) {
+            createContactEntry()
+        }
+
+        firebaseStorage
+            .getReference(directory)
+            .putFile(imgData)
+            .addOnSuccessListener {
+                val messageToSend = MessagePayload(
+                    timestamp = TimestampGenerator.generateString(),
+                    userUID = currentUser.userUID,
+                    imageUrl = directory
+                )
+                saveMessageToDatabase(messageToSend)
+            }
+
+    }
+
+    private fun createContactEntry() {
+        roomID = UUIDGenerator.generateString()
+        setMessageReference()
+        firebaseDatabase
+            .getReference("Contacts/${currentUser.userUID}/${userToChat.userUID}")
+            .setValue(
+                ContactPayload(
+                    userToChat.email,
+                    userToChat.name,
+                    roomID,
+                    userToChat.userUID
+                )
+            )
+        firebaseDatabase
+            .getReference("Contacts/${userToChat.userUID}/${currentUser.userUID}")
+            .setValue(
+                ContactPayload(
+                    currentUser.email,
+                    currentUser.name,
+                    roomID,
+                    currentUser.userUID
+                )
+            )
     }
 
     private val photoResultLaunch = registerForActivityResult(
@@ -151,58 +203,12 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun saveImageToStorage(imgData: Uri) {
-        val timestampEpoch = Instant.now().toEpochMilli().toString()
-        val directory = "images/$timestampEpoch.jpg"
-
-        createContactEntry()
-
-        firebaseStorage
-            .getReference(directory)
-            .putFile(imgData)
-            .addOnSuccessListener {
-                val messageToSend = MessagePayload(
-                    timestamp = LocalDateTime.now()
-                        .format(DateTimeFormatter.ofPattern("MMMM dd, yyyy HH:mm")),
-                    userUID = currentUser.userUID,
-                    imageUrl = directory
-                )
-                saveMessageToDatabase(messageToSend)
-            }
-
-    }
-
-    private fun createContactEntry() {
-        if (!hasContact) {
-            roomID = UUID.randomUUID().toString()
-            messageReference = firebaseDatabase.getReference("Chatrooms").child(roomID)
-            firebaseDatabase
-                .getReference("Contacts/${currentUser.userUID}/${userToChat.userUID}")
-                .setValue(
-                    ContactPayload(
-                        userToChat.email,
-                        userToChat.name,
-                        roomID,
-                        userToChat.userUID
-                    )
-                )
-            firebaseDatabase
-                .getReference("Contacts/${userToChat.userUID}/${currentUser.userUID}")
-                .setValue(
-                    ContactPayload(
-                        currentUser.email,
-                        currentUser.name,
-                        roomID,
-                        currentUser.userUID
-                    )
-                )
-        }
-    }
-
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.iv_send -> {
-                createContactEntry()
+                if (!hasContact) {
+                    createContactEntry()
+                }
 
                 val messageToSend = MessagePayload(
                     message = binding.etMessage.text.toString(),
@@ -226,6 +232,8 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-
-
+    override fun finish() {
+        messageAdapter.stopListening()
+        super.finish()
+    }
 }

@@ -14,14 +14,15 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import ph.gcash.marites.R
 import ph.gcash.marites.databinding.FragmentLoginBinding
-import ph.gcash.marites.login.model.User
-import ph.gcash.marites.login.model.UserPayload
+import ph.gcash.marites.models.User
+import ph.gcash.marites.models.UserPayload
 import ph.gcash.marites.main.MainActivity
 import ph.gcash.marites.utilities.UserPreference
 import ph.gcash.marites.utilities.UserPreference.user
 
-class LoginFragment(val prefKey: String) : Fragment() {
+class LoginFragment() : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
@@ -34,6 +35,7 @@ class LoginFragment(val prefKey: String) : Fragment() {
                 MainActivity::class.java
             )
             startActivity(intent)
+            this.requireActivity().finish()
         }
     }
 
@@ -71,8 +73,6 @@ class LoginFragment(val prefKey: String) : Fragment() {
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     getUserDataFromDatabase(firebaseAuth.currentUser!!.uid)
-
-
                 } else {
                     Toast.makeText(
                         this.requireActivity().applicationContext,
@@ -80,7 +80,7 @@ class LoginFragment(val prefKey: String) : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                }
+            }
     }
 
     private fun checkLoginFields(loginUser: User): Boolean {
@@ -134,7 +134,8 @@ class LoginFragment(val prefKey: String) : Fragment() {
 
     private fun saveUserToPref(loginUser: UserPayload) {
         val userPref = UserPreference.getUserPreference(
-            this.requireActivity().applicationContext, prefKey
+            this.requireActivity().applicationContext,
+            getString(R.string.app_id)
         )
         userPref.user = User(name = loginUser.name!!,
                         email = loginUser.email!!,

@@ -1,5 +1,6 @@
 package ph.gcash.marites.main.ui
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import ph.gcash.marites.R
 import ph.gcash.marites.databinding.FragmentProfileBinding
+import ph.gcash.marites.login.LoginActivity
 import ph.gcash.marites.utilities.UserPreference
 import ph.gcash.marites.utilities.UserPreference.user
 
@@ -54,7 +56,9 @@ class ProfileFragment : Fragment() {
         binding.UUIDItem.text = user.userUID
         binding.userEmailItem.text = user.email
         binding.fullNameItem.text = user.name
-
+        binding.btnLogout.setOnClickListener {
+            signOutUser()
+        }
 
     }
 
@@ -69,6 +73,15 @@ class ProfileFragment : Fragment() {
         addOnSuccessListener {
             Picasso.get().load(it).resize(300, 300).centerInside().into(imageView)
         }
+    }
+
+    private fun signOutUser() {
+        UserPreference.clearPrefs(this.requireActivity().applicationContext, getString(R.string.app_id))
+        firebaseAuth.signOut()
+
+        val goToLoginActivity = Intent(this.requireActivity().applicationContext, LoginActivity::class.java)
+        startActivity(goToLoginActivity)
+        this.requireActivity().finish()
     }
 }
 

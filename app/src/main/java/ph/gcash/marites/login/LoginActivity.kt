@@ -11,7 +11,6 @@ import ph.gcash.marites.login.ui.RegistrationFragment
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var prefKey: String
 
     private lateinit var loginFragment: LoginFragment
     private lateinit var registrationFragment: RegistrationFragment
@@ -27,9 +26,8 @@ class LoginActivity : AppCompatActivity() {
             binding.llLoginBg.background as AnimationDrawable
         animationDrawable.start()
 
-        prefKey = resources.getString(R.string.app_id)
-        loginFragment = LoginFragment(prefKey)
-        registrationFragment = RegistrationFragment(prefKey)
+        loginFragment = LoginFragment()
+        registrationFragment = RegistrationFragment()
 
         initFragments()
     }

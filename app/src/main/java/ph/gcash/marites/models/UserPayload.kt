@@ -1,4 +1,4 @@
-package ph.gcash.marites.login.model
+package ph.gcash.marites.models
 
 import com.google.firebase.database.IgnoreExtraProperties
 

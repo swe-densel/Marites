@@ -1,4 +1,4 @@
-package ph.gcash.marites.login.model
+package ph.gcash.marites.models
 
 import android.graphics.drawable.Drawable
 import java.io.Serializable

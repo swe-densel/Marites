@@ -2,13 +2,12 @@ package ph.gcash.marites.utilities
 
 import android.content.Context
 import android.content.SharedPreferences
-import ph.gcash.marites.login.model.User
+import ph.gcash.marites.models.User
 
 object UserPreference {
     val userUID = "USER_UID"
     val userName = "USER_NAME"
     val userEmail = "USER_EMAIL"
-    val userContact = "HAS_CONTACT"
 
     fun getUserPreference(context: Context, prefkey: String):
             SharedPreferences = context
@@ -61,13 +60,4 @@ object UserPreference {
                 it.putString(userEmail, value)
             }
         }
-
-    var SharedPreferences.contact
-        get() = getBoolean(userContact, false)
-        set(value) {
-            editor {
-                it.putBoolean(userContact, value)
-            }
-        }
-
 }

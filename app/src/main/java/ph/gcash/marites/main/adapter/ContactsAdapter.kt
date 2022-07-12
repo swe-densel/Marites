@@ -1,4 +1,4 @@
-package ph.gcash.marites.login.adapter
+package ph.gcash.marites.main.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.tasks.Task
 import com.google.android.material.imageview.ShapeableImageView
@@ -17,9 +16,9 @@ import com.squareup.picasso.Picasso
 import ph.gcash.marites.R
 import ph.gcash.marites.chat.ChatActivity
 import ph.gcash.marites.chat.adapter.loadIntoPicasso
-import ph.gcash.marites.login.model.User
+import ph.gcash.marites.models.User
 
-class ContactsAdapter(private val userList : ArrayList<User> , private val context: Context): RecyclerView.Adapter<ContactsAdapter.MyViewHolder>() {
+class ContactsAdapter(private val userList : ArrayList<User>, private val context: Context): RecyclerView.Adapter<ContactsAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -63,11 +62,13 @@ class ContactsAdapter(private val userList : ArrayList<User> , private val conte
                 val goToChatActivity = Intent(
                     context,
                     ChatActivity::class.java)
+                goToChatActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
                 val bundle = Bundle()
                 bundle.putSerializable("ChatUser",currentitem)
                 goToChatActivity.putExtras(bundle)
-                startActivity(context,goToChatActivity,bundle)
 
+                context.startActivity(goToChatActivity)
             }
         }
 

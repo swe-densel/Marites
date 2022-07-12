@@ -36,6 +36,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_info"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/white"
             android:text="About this App "
             android:textColor="@color/white"
             android:textSize="26sp"
@@ -48,13 +51,12 @@
             android:id="@+id/textView"
             android:layout_width="356dp"
             android:layout_height="202dp"
-            android:text="Marites is a free, all-in-one messaging app designed by Celso and Densel for android smartphones. It allows you to text, chat, send group texts, send pictures, share videos, send audio messages, and more."
+            android:text="Marites is a free messaging app developed by Celso and Densel for Android smartphones. It allows you to chat with text to speech functionality and send pictures."
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp"
             tools:layout_editor_absoluteX="13dp"
             tools:layout_editor_absoluteY="502dp" />
-
 
     </LinearLayout>
 

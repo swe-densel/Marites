@@ -13,14 +13,15 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import ph.gcash.marites.ContactsActivity
-import ph.gcash.marites.login.model.User
+import ph.gcash.marites.R
+import ph.gcash.marites.models.User
 import ph.gcash.marites.databinding.FragmentRegistrationBinding
-import ph.gcash.marites.login.model.UserPayload
+import ph.gcash.marites.models.UserPayload
+import ph.gcash.marites.main.MainActivity
 import ph.gcash.marites.utilities.UserPreference
 import ph.gcash.marites.utilities.UserPreference.user
 
-class RegistrationFragment(val prefKey: String) : Fragment() {
+class RegistrationFragment() : Fragment() {
     private lateinit var binding: FragmentRegistrationBinding
 
     private lateinit var firebaseAuth: FirebaseAuth
@@ -91,13 +92,11 @@ class RegistrationFragment(val prefKey: String) : Fragment() {
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     newUser.userUID = firebaseAuth.currentUser!!.uid
-                    uploadUserImage(newUser.userUID)
-                    saveUserToDatabase(newUser)
-                    saveUserToPref(newUser)
+                    uploadUserImage(newUser)
 
                     val intent = Intent(
                         this.requireActivity().applicationContext,
-                        ContactsActivity::class.java
+                        MainActivity::class.java
                     )
                     startActivity(intent)
                     this.requireActivity().finish()
@@ -108,14 +107,14 @@ class RegistrationFragment(val prefKey: String) : Fragment() {
                         "Registration Failed: ${it.exception}",
                         Toast.LENGTH_SHORT
                     ).show()
-
                 }
             }
     }
 
     private fun saveUserToPref(newUser: User) {
         val userPref = UserPreference.getUserPreference(
-            this.requireActivity().applicationContext, prefKey
+            this.requireActivity().applicationContext,
+            getString(R.string.app_id)
         )
         userPref.user = newUser
     }
@@ -169,9 +168,13 @@ class RegistrationFragment(val prefKey: String) : Fragment() {
         return true
     }
 
-    private fun uploadUserImage(uid: String) {
-        val ref = FirebaseStorage.getInstance().getReference("users/$uid")
+    private fun uploadUserImage(newUser: User) {
+        val ref = FirebaseStorage
+            .getInstance()
+            .getReference("users/${newUser.userUID}")
+
         ref.putFile(selectedImq)
+            .addOnSuccessListener { saveUserToDatabase(newUser) }
     }
 
     private fun saveUserToDatabase(newUser: User) {
@@ -181,7 +184,11 @@ class RegistrationFragment(val prefKey: String) : Fragment() {
             newUser.userUID,
             newUser.email
         )
-        userRef.child(newUser.userUID).setValue(createUserRequest)
+        userRef.child(newUser.userUID)
+            .setValue(createUserRequest)
+            .addOnSuccessListener {
+                saveUserToPref(newUser)
+            }
     }
 }
 

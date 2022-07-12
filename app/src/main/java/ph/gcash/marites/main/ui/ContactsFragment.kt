@@ -20,8 +20,8 @@ import com.google.firebase.storage.FirebaseStorage
 import ph.gcash.marites.R
 import ph.gcash.marites.databinding.FragmentContactsBinding
 import ph.gcash.marites.login.LoginActivity
-import ph.gcash.marites.login.adapter.ContactsAdapter
-import ph.gcash.marites.login.model.User
+import ph.gcash.marites.main.adapter.ContactsAdapter
+import ph.gcash.marites.models.User
 import ph.gcash.marites.utilities.UserPreference
 import ph.gcash.marites.utilities.UserPreference.uid
 

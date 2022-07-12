@@ -19,8 +19,8 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import ph.gcash.marites.databinding.FragmentSearchBinding
-import ph.gcash.marites.login.adapter.ContactsAdapter
-import ph.gcash.marites.login.model.User
+import ph.gcash.marites.main.adapter.ContactsAdapter
+import ph.gcash.marites.models.User
 
 class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
