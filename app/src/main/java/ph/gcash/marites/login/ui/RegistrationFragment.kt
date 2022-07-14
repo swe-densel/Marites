@@ -24,7 +24,7 @@ import ph.gcash.marites.utilities.UserPreference.user
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class RegistrationFragment() : Fragment(), View.OnClickListener {
+class RegistrationFragment() : Fragment() {
     private lateinit var binding: FragmentRegistrationBinding
 
     private lateinit var firebaseAuth: FirebaseAuth
@@ -44,9 +44,28 @@ class RegistrationFragment() : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initFirebaseInstances()
+        val photoResultLauncher = photoResultLaunch()
 
-        binding.btnRegister.setOnClickListener(this)
-        binding.profileImage.setOnClickListener(this)
+        binding.btnRegister.setOnClickListener {
+            val email = binding.tieEmail.text.toString()
+            val password = binding.tiePassword.text.toString()
+            val name = binding.tieName.text.toString()
+            val confirmPassword = binding.tieConfirm.text.toString()
+            val image = binding.profileImage.drawable
+
+            val newUser = User(name, email, password, confirmPassword, image)
+            val areInputsValid = checkInputs(newUser)
+
+            if (areInputsValid) {
+                registerUser(newUser)
+            }
+        }
+        binding.profileImage.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_GET_CONTENT
+            intent.type = "image/*"
+            photoResultLauncher.launch(intent)
+        }
     }
 
     private fun photoResultLaunch() = registerForActivityResult(
@@ -76,13 +95,6 @@ class RegistrationFragment() : Fragment(), View.OnClickListener {
                     newUser.userUID = firebaseAuth.currentUser!!.uid
                     uploadUserImage(newUser)
 
-                    val intent = Intent(
-                        this.requireActivity().applicationContext,
-                        MainActivity::class.java
-                    )
-                    startActivity(intent)
-                    this.requireActivity().finish()
-
                 } else {
                     Toast.makeText(
                         this.requireActivity().applicationContext,
@@ -95,7 +107,7 @@ class RegistrationFragment() : Fragment(), View.OnClickListener {
 
     private fun saveUserToPref(newUser: User) {
         val userPref = UserPreference.getUserPreference(
-            this.requireActivity().applicationContext,
+            this@RegistrationFragment.requireActivity().applicationContext,
             getString(R.string.app_id)
         )
         userPref.user = newUser
@@ -170,34 +182,14 @@ class RegistrationFragment() : Fragment(), View.OnClickListener {
             .setValue(createUserRequest)
             .addOnSuccessListener {
                 saveUserToPref(newUser)
+
+                val intent = Intent(
+                    this.requireActivity().applicationContext,
+                    MainActivity::class.java
+                )
+                startActivity(intent)
+                this.requireActivity().finish()
             }
-    }
-
-    override fun onClick(v: View?) {
-        when(v?.id) {
-            R.id.btn_register -> {
-                val email = binding.tieEmail.text.toString()
-                val password = binding.tiePassword.text.toString()
-                val name = binding.tieName.text.toString()
-                val confirmPassword = binding.tieConfirm.text.toString()
-                val image = binding.profileImage.drawable
-
-                val newUser = User(name, email, password, confirmPassword, image)
-                val areInputsValid = checkInputs(newUser)
-
-                if (areInputsValid) {
-                    registerUser(newUser)
-                }
-            }
-
-            R.id.profile_image -> {
-                val intent = Intent()
-                intent.action = Intent.ACTION_GET_CONTENT
-                intent.type = "image/*"
-                val photoResultLauncher = photoResultLaunch()
-                photoResultLauncher.launch(intent)
-            }
-        }
     }
 }
 
