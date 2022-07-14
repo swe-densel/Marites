@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -74,8 +75,11 @@ class LoginFragment() : Fragment() {
             .signInWithEmailAndPassword(loginUser.email, loginUser.password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
+                    showProgressBar()
                     getUserDataFromDatabase(firebaseAuth.currentUser!!.uid)
+
                 } else {
+                    hideProgressBar()
                     Toast.makeText(
                         this.requireActivity().applicationContext,
                         "Wrong Credentials",
@@ -83,6 +87,16 @@ class LoginFragment() : Fragment() {
                     ).show()
                 }
             }
+    }
+
+    private fun showProgressBar() {
+        binding.pbLoginProgress.visibility = ProgressBar.VISIBLE
+        binding.tvLoginMessage.text = getString(R.string.please_wait)
+    }
+
+    private fun hideProgressBar() {
+        binding.pbLoginProgress.visibility = ProgressBar.GONE
+        binding.tvLoginMessage.text = getString(R.string.register_now)
     }
 
     private fun checkLoginFields(loginUser: User): Boolean {
@@ -124,6 +138,7 @@ class LoginFragment() : Fragment() {
                     "ERROR: ${error.toException()}",
                     Toast.LENGTH_SHORT
                 ).show()
+                hideProgressBar()
             }
         })
     }

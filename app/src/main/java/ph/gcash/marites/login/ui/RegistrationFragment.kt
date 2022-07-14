@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -60,6 +61,7 @@ class RegistrationFragment() : Fragment() {
                 registerUser(newUser)
             }
         }
+
         binding.profileImage.setOnClickListener {
             val intent = Intent()
             intent.action = Intent.ACTION_GET_CONTENT
@@ -92,10 +94,12 @@ class RegistrationFragment() : Fragment() {
             .createUserWithEmailAndPassword(newUser.email, newUser.password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
+                    showProgressBar()
                     newUser.userUID = firebaseAuth.currentUser!!.uid
                     uploadUserImage(newUser)
 
                 } else {
+                    hideProgressBar()
                     Toast.makeText(
                         this.requireActivity().applicationContext,
                         "Registration Failed: ${it.exception}",
@@ -103,6 +107,16 @@ class RegistrationFragment() : Fragment() {
                     ).show()
                 }
             }
+    }
+
+    private fun showProgressBar() {
+        binding.pbRegisterProgress.visibility = ProgressBar.VISIBLE
+        binding.tvRegisterMessage.text = getString(R.string.please_wait)
+    }
+
+    private fun hideProgressBar() {
+        binding.pbRegisterProgress.visibility = ProgressBar.GONE
+        binding.tvRegisterMessage.text = getString(R.string.login_now)
     }
 
     private fun saveUserToPref(newUser: User) {

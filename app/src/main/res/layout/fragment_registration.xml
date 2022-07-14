@@ -132,7 +132,17 @@
                 app:icon="@drawable/ic_register"
                 app:cornerRadius="@dimen/default_corner_radius_view" />
 
+            <ProgressBar
+                android:id="@+id/pb_registerProgress"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:visibility="gone"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/green_200"/>
+
             <TextView
+                android:id="@+id/tv_registerMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
