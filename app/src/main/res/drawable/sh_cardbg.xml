@@ -3,5 +3,5 @@
     android:shape="rectangle">
     <solid android:color="@color/transparent"/>
     <stroke android:width="3dp" android:color="@color/green_200"/>
-    <corners android:radius="@dimen/layout_card_corner_default_size" />
+    <corners android:radius="@dimen/large_corner_radius_view" />
 </shape>

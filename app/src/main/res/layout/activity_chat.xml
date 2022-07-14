@@ -22,7 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:layout_margin="@dimen/view_margin_default_size"
+            android:layout_margin="@dimen/default_margin"
             android:background="@color/cyan_500"
             android:layout_weight="0.5"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
@@ -33,9 +33,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:layout_margin="@dimen/view_margin_default_size"
+            android:layout_margin="@dimen/default_margin"
             android:gravity="center_vertical"
-            android:text="Full Name"
+            android:text="@string/name"
             android:textSize="24sp"
             android:textColor="@color/black"
             android:textStyle="bold"/>
@@ -47,12 +47,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.9999"
-        android:layout_margin="@dimen/view_margin_default_size"/>
+        android:layout_margin="@dimen/default_margin"/>
 
     <LinearLayout
         android:id="@+id/lv_bottombar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_weight="0.0001"
         android:weightSum="5"
         android:orientation="horizontal"
@@ -62,7 +62,7 @@
             android:id="@+id/iv_uploadImg"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/view_margin_default_size"
+            android:layout_margin="@dimen/default_margin"
             android:layout_weight="0.5"
             android:src="@drawable/ic_add_photo"/>
 
@@ -70,8 +70,8 @@
             android:id="@+id/et_message"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/view_margin_default_size"
-            android:padding="10dp"
+            android:layout_margin="@dimen/default_margin"
+            android:padding="@dimen/default_padding"
             android:background="@drawable/sh_messagebox_background"
             android:hint="@string/message"
             android:textColorHint="@color/gray_700"
@@ -82,7 +82,7 @@
             android:id="@+id/iv_send"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/view_margin_default_size"
+            android:layout_margin="@dimen/default_margin"
             android:background="@color/green_500"
             android:layout_weight="0.5"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"

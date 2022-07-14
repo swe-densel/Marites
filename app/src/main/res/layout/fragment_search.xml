@@ -7,32 +7,20 @@
     android:orientation="vertical"
     tools:context=".main.ui.SearchFragment">
 
-
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:queryHint="Search User Here"
+        app:queryHint="@string/search_user"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="34dp"
         app:iconifiedByDefault="false"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_contacts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/view_margin_default_size"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.738"
-        tools:listitem="@layout/contact_item" />
-
-
-
-
-
+        android:layout_margin="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        tools:listitem="@layout/item_contact" />
 
 </LinearLayout>

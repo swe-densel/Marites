@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:elevation="10dp"
-    android:layout_margin="10dp"
+    android:layout_margin="@dimen/default_margin"
     tools:context=".main.ui.ProfileFragment">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -15,7 +15,7 @@
         android:layout_width="175dp"
         android:layout_height="175dp"
         android:background="@color/cyan_500"
-        android:padding="5dp"
+        android:padding="@dimen/small_padding"
         android:src="@drawable/ic_person"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
         app:strokeColor="@color/white"
@@ -32,8 +32,8 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_hash"
             app:drawableTint="@color/cyan_200"
-            android:drawablePadding="5dp"
-            android:text="ID: "
+            android:drawablePadding="@dimen/small_padding"
+            android:text="@string/profile_id"
             android:textColor="@color/cyan_200"
             android:textSize="26sp"
             android:textStyle="bold"/>
@@ -42,8 +42,7 @@
             android:id="@+id/UUID_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="User UUID"
+            android:layout_marginStart="@dimen/small_margin"
             android:textColor="@color/white"
             android:textSize="20sp"/>
    </LinearLayout>
@@ -59,8 +58,8 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_profile"
             app:drawableTint="@color/cyan_200"
-            android:drawablePadding="5dp"
-            android:text="Name: "
+            android:drawablePadding="@dimen/small_padding"
+            android:text="@string/profile_name"
             android:textColor="@color/cyan_200"
             android:textSize="26sp"
             android:textStyle="bold"/>
@@ -69,8 +68,7 @@
             android:id="@+id/fullName_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="UserName"
+            android:layout_marginStart="@dimen/small_margin"
             android:textColor="@color/white"
             android:textSize="20sp"/>
 
@@ -88,8 +86,8 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_email"
             app:drawableTint="@color/cyan_200"
-            android:drawablePadding="5dp"
-            android:text="Email: "
+            android:drawablePadding="@dimen/small_padding"
+            android:text="@string/profile_email"
             android:textColor="@color/cyan_200"
             android:textSize="26sp"
             android:textStyle="bold" />
@@ -98,8 +96,7 @@
             android:id="@+id/userEmail_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="userEmail@gmail.com"
+            android:layout_marginStart="@dimen/small_margin"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -110,11 +107,11 @@
         android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/view_margin_default_size"
+        android:layout_margin="@dimen/default_margin"
         android:text="@string/logout"
         android:textSize="20sp"
         android:textStyle="bold"
         android:drawableLeft="@drawable/ic_logout"
-        app:cornerRadius="@dimen/view_card_corner_default_size" />
+        app:cornerRadius="@dimen/default_corner_radius_view" />
 
 </LinearLayout>

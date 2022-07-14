@@ -22,7 +22,7 @@ class ContactsAdapter(private val userList : ArrayList<User>, private val contex
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.contact_item,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_contact,parent,false)
 
         return MyViewHolder(itemView , context)
     }

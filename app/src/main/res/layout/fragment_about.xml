@@ -6,29 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".main.ui.AboutFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="@dimen/layout_padding_default_size"
-        android:background="@color/cyan_700"
-        >
-
+        android:padding="@dimen/default_padding"
+        android:background="@color/cyan_700">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:background="@color/cyan_500"
-            android:padding="5dp"
-            android:src="@drawable/marifinal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:padding="@dimen/small_padding"
+            android:src="@drawable/logo_marites"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             app:strokeColor="@color/white"
             app:strokeWidth="2dp" />
@@ -39,24 +31,21 @@
             android:drawableLeft="@drawable/ic_info"
             android:drawablePadding="5dp"
             android:drawableTint="@color/white"
-            android:text="About this App "
+            android:text="@string/about_this_app"
             android:textColor="@color/white"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:layout_margin="10dp"
-            tools:layout_editor_absoluteX="4dp"
-            tools:layout_editor_absoluteY="458dp" />
+            android:layout_margin="@dimen/small_margin"/>
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="356dp"
-            android:layout_height="202dp"
-            android:text="Marites is a free messaging app developed by Celso and Densel for Android smartphones. It allows you to chat with text to speech functionality and send pictures."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_margin"
+            android:text="@string/app_description"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="13dp"
-            tools:layout_editor_absoluteY="502dp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 

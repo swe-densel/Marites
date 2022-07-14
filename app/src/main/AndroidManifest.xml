@@ -20,12 +20,15 @@
         tools:targetApi="31">
         <activity
             android:name=".chat.ChatActivity"
+            android:screenOrientation="locked"
             android:exported="false"/>
         <activity
             android:name=".login.LoginActivity"
+            android:screenOrientation="locked"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
+            android:screenOrientation="locked"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,6 +37,7 @@
         </activity>
         <activity
             android:name=".main.MainActivity"
+            android:screenOrientation="locked"
             android:exported="true" >
         </activity>
     </application>

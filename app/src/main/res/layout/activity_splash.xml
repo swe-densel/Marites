@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-        android:src="@drawable/marifinal"/>
+        android:src="@drawable/logo_marites"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,6 +29,6 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:indeterminate="true"
         android:indeterminateTint="@color/white"
-        android:layout_marginTop="@dimen/view_margin_default_size"/>
+        android:layout_marginTop="@dimen/default_margin"/>
 
 </LinearLayout>

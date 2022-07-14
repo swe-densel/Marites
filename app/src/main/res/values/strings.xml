@@ -4,7 +4,7 @@
     <string name="email">Email Address</string>
     <string name="password">Password</string>
     <string name="confirm"> Retype Password</string>
-    <string name="Name">Name</string>
+    <string name="name">Name</string>
     <string name="login">LOGIN</string>
     <string name="logout">Logout</string>
     <string name="register">REGISTER</string>
@@ -16,6 +16,11 @@
     <string name="search">Search ka-Chat</string>
     <string name="message">Hello!</string>
     <string name="app_id">ph.gcash.marites</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_description">Marites is a free messaging app developed by Celso and Densel for Android smartphones. It allows you to chat with text to speech functionality and send pictures.</string>
+    <string name="about_this_app">About this App</string>
+    <string name="profile_id">ID:</string>
+    <string name="profile_name">Name:</string>
+    <string name="profile_email">Email:</string>
+    <string name="retype_password">Retype Password</string>
+    <string name="search_user">Search User Here</string>
 </resources>

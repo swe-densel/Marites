@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="@dimen/layout_padding_default_size"
+            android:layout_margin="@dimen/default_padding"
             android:gravity="center"
             android:elevation="10dp">
 
@@ -25,7 +25,7 @@
                 android:id="@+id/profile_image"
                 android:layout_width="125dp"
                 android:layout_height="125dp"
-                android:padding="5dp"
+                android:padding="@dimen/small_padding"
                 android:src="@drawable/ic_person"
                 android:background="@color/cyan_500"
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
@@ -40,13 +40,13 @@
                 app:counterTextColor="@color/white"
                 app:boxStrokeColor="@color/white"
                 app:startIconDrawable="@drawable/ic_text"
-                android:layout_margin="@dimen/view_margin_default_size">
+                android:layout_margin="@dimen/default_margin">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tie_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/Name"
+                    android:hint="@string/name"
                     android:background="@color/transparent"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"/>
@@ -61,7 +61,7 @@
                 app:counterTextColor="@color/white"
                 app:boxStrokeColor="@color/white"
                 app:startIconDrawable="@drawable/ic_email"
-                android:layout_margin="@dimen/view_margin_default_size">
+                android:layout_margin="@dimen/default_margin">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tie_email"
@@ -82,7 +82,7 @@
                 app:counterTextColor="@color/white"
                 app:boxStrokeColor="@color/white"
                 app:startIconDrawable="@drawable/ic_password"
-                android:layout_margin="@dimen/view_margin_default_size">
+                android:layout_margin="@dimen/default_margin">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tie_password"
@@ -94,7 +94,6 @@
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"/>
 
-
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -105,13 +104,13 @@
                 app:counterTextColor="@color/white"
                 app:boxStrokeColor="@color/white"
                 app:startIconDrawable="@drawable/ic_password"
-                android:layout_margin="@dimen/view_margin_default_size">
+                android:layout_margin="@dimen/default_margin">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tie_confirm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Retype Password"
+                    android:hint="@string/retype_password"
                     android:inputType="textPassword"
                     android:background="@color/transparent"
                     android:textColor="@color/white"
@@ -125,20 +124,20 @@
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/view_margin_default_size"
+                android:layout_margin="@dimen/default_margin"
                 android:text="@string/register"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:backgroundTint="@color/green_500"
                 app:icon="@drawable/ic_register"
-                app:cornerRadius="@dimen/view_card_corner_default_size" />
+                app:cornerRadius="@dimen/default_corner_radius_view" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textAlignment="center"
-                android:padding="5dp"
+                android:padding="@dimen/small_padding"
                 android:text="@string/login_now"
                 android:textColor="@color/white"
                 android:textStyle="bold"

@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="8dp"
-    app:cardCornerRadius="20dp"
+    app:cardCornerRadius="@dimen/large_corner_radius_view"
     app:cardBackgroundColor="@color/transparent"
-    android:layout_margin="16dp"
+    android:layout_margin="@dimen/large_margin"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -20,9 +20,9 @@
             android:id="@+id/contact_image"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/small_margin"
             android:background="@color/cyan_500"
-            android:padding="5dp"
+            android:padding="@dimen/small_padding"
             android:src="@drawable/ic_person"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             app:strokeColor="@color/white"
@@ -31,8 +31,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginVertical="6dp"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_marginVertical="@dimen/small_margin"
             android:orientation="vertical">
 
             <LinearLayout
@@ -45,7 +45,6 @@
                     android:id="@+id/fullName_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Arya"
                     android:textColor="@color/cyan_200"
                     android:textStyle="bold"
                     android:textSize="28sp"/>
@@ -56,16 +55,11 @@
                     android:id="@+id/userEmail_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="AryaStarl@gmail.com"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
         </LinearLayout>
 
-
     </LinearLayout>
-
-
-
 
 </androidx.cardview.widget.CardView>

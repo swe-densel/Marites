@@ -18,10 +18,13 @@ import ph.gcash.marites.models.User
 import ph.gcash.marites.databinding.FragmentRegistrationBinding
 import ph.gcash.marites.models.UserPayload
 import ph.gcash.marites.main.MainActivity
+import ph.gcash.marites.models.MessagePayload
 import ph.gcash.marites.utilities.UserPreference
 import ph.gcash.marites.utilities.UserPreference.user
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
-class RegistrationFragment() : Fragment() {
+class RegistrationFragment() : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentRegistrationBinding
 
     private lateinit var firebaseAuth: FirebaseAuth
@@ -42,29 +45,8 @@ class RegistrationFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initFirebaseInstances()
 
-        val photoResultLauncher = photoResultLaunch()
-
-        binding.btnRegister.setOnClickListener {
-            val email = binding.tieEmail.text.toString()
-            val password = binding.tiePassword.text.toString()
-            val name = binding.tieName.text.toString()
-            val confirmPassword = binding.tieConfirm.text.toString()
-            val image = binding.profileImage.drawable
-
-            val newUser = User(name, email, password, confirmPassword, image)
-            val areInputsValid = checkInputs(newUser)
-
-            if (areInputsValid) {
-                registerUser(newUser)
-            }
-        }
-
-        binding.profileImage.setOnClickListener {
-            val intent = Intent()
-            intent.action = Intent.ACTION_GET_CONTENT
-            intent.type = "image/*"
-            photoResultLauncher.launch(intent)
-        }
+        binding.btnRegister.setOnClickListener(this)
+        binding.profileImage.setOnClickListener(this)
     }
 
     private fun photoResultLaunch() = registerForActivityResult(
@@ -189,6 +171,33 @@ class RegistrationFragment() : Fragment() {
             .addOnSuccessListener {
                 saveUserToPref(newUser)
             }
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id) {
+            R.id.btn_register -> {
+                val email = binding.tieEmail.text.toString()
+                val password = binding.tiePassword.text.toString()
+                val name = binding.tieName.text.toString()
+                val confirmPassword = binding.tieConfirm.text.toString()
+                val image = binding.profileImage.drawable
+
+                val newUser = User(name, email, password, confirmPassword, image)
+                val areInputsValid = checkInputs(newUser)
+
+                if (areInputsValid) {
+                    registerUser(newUser)
+                }
+            }
+
+            R.id.profile_image -> {
+                val intent = Intent()
+                intent.action = Intent.ACTION_GET_CONTENT
+                intent.type = "image/*"
+                val photoResultLauncher = photoResultLaunch()
+                photoResultLauncher.launch(intent)
+            }
+        }
     }
 }
 

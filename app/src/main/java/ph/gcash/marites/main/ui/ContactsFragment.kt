@@ -3,9 +3,11 @@ package ph.gcash.marites.main.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,13 +29,8 @@ import ph.gcash.marites.utilities.UserPreference.uid
 
 class ContactsFragment : Fragment() {
     private lateinit var binding: FragmentContactsBinding
-    private lateinit var userReference : DatabaseReference
     private lateinit var userRecyclerView: RecyclerView
     private lateinit var userArrayList: ArrayList<User>
-    private val logger = "ContactsActivity"
-    private lateinit var storageReference: FirebaseStorage
-
-    private lateinit var selectedImq: Uri
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,40 +51,38 @@ class ContactsFragment : Fragment() {
         getDataFromDatabase()
     }
 
-
     private fun getDataFromDatabase() {
-        val userId = UserPreference.getUserPreference(this.requireActivity().applicationContext,getString(R.string.app_id)).uid
+        val userId = UserPreference
+            .getUserPreference(
+                this.requireActivity().applicationContext,
+                getString(R.string.app_id))
+            .uid
+
         val usersReference = Firebase.database.getReference("Contacts").child(userId!!)
+
         usersReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-
-                if (snapshot.exists()){
-
-                    for (userSnapshot in snapshot.children){
+                if (snapshot.exists()) {
+                    for (userSnapshot in snapshot.children) {
                         val user = userSnapshot.getValue(User::class.java)
                         userArrayList.add(user!!)
                     }
 
-                    userRecyclerView.adapter = ContactsAdapter(userArrayList,this@ContactsFragment.requireActivity().applicationContext)
+                    userRecyclerView.adapter = ContactsAdapter(
+                        userArrayList,
+                        this@ContactsFragment.requireActivity().applicationContext
+                    )
                 }
-
-
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Toast.makeText(
+                    this@ContactsFragment.requireActivity().applicationContext,
+                    "ERROR: ${error.toException()}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-
         })
-    }
-
-    private fun signOutUser() {
-        UserPreference.clearPrefs(this.requireActivity().applicationContext, getString(R.string.app_id))
-        FirebaseAuth.getInstance().signOut()
-
-        val goToLoginActivity = Intent(this.requireActivity().applicationContext, LoginActivity::class.java)
-        startActivity(goToLoginActivity)
-        this.requireActivity().finish()
     }
 
 }

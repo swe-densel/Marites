@@ -21,11 +21,9 @@ import ph.gcash.marites.utilities.UserPreference.user
 
 
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private lateinit var binding: FragmentProfileBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var firebaseStorage: FirebaseStorage
-    private lateinit var firebaseDatabase: FirebaseDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,38 +31,33 @@ class ProfileFragment : Fragment() {
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        firebaseAuth = FirebaseAuth.getInstance()
-        firebaseStorage = FirebaseStorage.getInstance()
+        initFirebase()
 
         val userPref = UserPreference.getUserPreference(
             this.requireActivity().applicationContext,
             getString(R.string.app_id)
         )
         val user = userPref.user
-
         fetchUserData(user.userUID)
-
 
         binding.UUIDItem.text = user.userUID
         binding.userEmailItem.text = user.email
         binding.fullNameItem.text = user.name
-        binding.btnLogout.setOnClickListener {
-            signOutUser()
-        }
+        binding.btnLogout.setOnClickListener { signOutUser() }
 
     }
 
+    private fun initFirebase() {
+        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseStorage = FirebaseStorage.getInstance()
+    }
+
     private fun fetchUserData(userUID: String) {
-        val imageURL =
-            FirebaseStorage.getInstance().reference.child("users/$userUID").downloadUrl
+        val imageURL = firebaseStorage.reference.child("users/$userUID").downloadUrl
         imageURL.loadIntoPicasso(binding.profileImage)
     }
 

@@ -4,7 +4,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
+    android:padding="@dimen/small_padding"
     android:gravity="start">
 
     <LinearLayout
@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/view_margin_default_size"
+        android:padding="@dimen/default_margin"
         android:background="@drawable/sh_left_message_background">
 
         <FrameLayout
@@ -24,7 +24,6 @@
             android:id="@+id/tv_timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="July 6, 2022 12:00:00"
             android:textColor="@color/black"
             android:textSize="11sp"/>
     </LinearLayout>

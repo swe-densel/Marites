@@ -6,7 +6,7 @@
     android:background="@drawable/sh_loginbox_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/layout_padding_default_size"
+    android:layout_margin="@dimen/default_padding"
     android:orientation="vertical"
     android:gravity="center"
     android:elevation="10dp"
@@ -20,7 +20,7 @@
         app:hintTextColor="@color/white"
         app:counterTextColor="@color/white"
         app:boxStrokeColor="@color/white"
-        android:layout_margin="@dimen/view_margin_default_size">
+        android:layout_margin="@dimen/default_margin">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tie_email"
@@ -41,7 +41,7 @@
         app:hintTextColor="@color/white"
         app:counterTextColor="@color/white"
         app:boxStrokeColor="@color/white"
-        android:layout_margin="@dimen/view_margin_default_size">
+        android:layout_margin="@dimen/default_margin">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tie_password"
@@ -60,19 +60,19 @@
         android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/view_margin_default_size"
+        android:layout_margin="@dimen/default_margin"
         android:text="@string/login"
         android:textSize="20sp"
         android:textStyle="bold"
         android:drawableLeft="@drawable/ic_login"
-        app:cornerRadius="@dimen/view_card_corner_default_size" />
+        app:cornerRadius="@dimen/default_corner_radius_view" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textAlignment="center"
-        android:padding="5dp"
+        android:padding="@dimen/small_padding"
         android:text="@string/register_now"
         android:textColor="@color/white"
         android:textStyle="bold"

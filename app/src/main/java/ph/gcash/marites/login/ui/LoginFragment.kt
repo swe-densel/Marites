@@ -2,7 +2,6 @@ package ph.gcash.marites.login.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,8 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import ph.gcash.marites.R
 import ph.gcash.marites.databinding.FragmentLoginBinding
 import ph.gcash.marites.models.User
@@ -25,17 +23,16 @@ import ph.gcash.marites.utilities.UserPreference.user
 class LoginFragment() : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firesbaseDatabase: FirebaseDatabase
 
     override fun onStart() {
         super.onStart()
+        checkIfUserLoggedIn()
+    }
 
-        if(firebaseAuth.currentUser != null){
-            val intent = Intent(
-                this.requireActivity().applicationContext,
-                MainActivity::class.java
-            )
-            startActivity(intent)
-            this.requireActivity().finish()
+    private fun checkIfUserLoggedIn() {
+        if (firebaseAuth.currentUser != null) {
+            moveToMainActivity()
         }
     }
 
@@ -49,22 +46,27 @@ class LoginFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        firebaseAuth = FirebaseAuth.getInstance()
+        initFirebase()
 
         binding.btnLogin.setOnClickListener {
             val email = binding.tieEmail.text.toString()
             val password = binding.tiePassword.text.toString()
-            Log.d("LoginFragment",password)
+
             val loginUser = User()
             loginUser.email = email
             loginUser.password = password
-            val areFieldsValid = checkLoginFields(loginUser)
 
+            val areFieldsValid = checkLoginFields(loginUser)
             if (areFieldsValid) {
                 signInUser(loginUser)
             }
         }
 
+    }
+
+    private fun initFirebase() {
+        firebaseAuth = FirebaseAuth.getInstance()
+        firesbaseDatabase = FirebaseDatabase.getInstance()
     }
 
     private fun signInUser(loginUser: User) {
@@ -105,20 +107,14 @@ class LoginFragment() : Fragment() {
     }
 
     private fun getUserDataFromDatabase(userUID : String) {
-        val usersReference = Firebase.database.getReference("Users").child(userUID)
-        usersReference.addValueEventListener(object : ValueEventListener {
+        val usersReference = firesbaseDatabase.getReference("Users/$userUID")
+        usersReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val userPayload = snapshot.getValue(UserPayload::class.java)
+
                 userPayload?.let {
-
                     saveUserToPref(it)
-
-                    val goToMainActivity = Intent(
-                        this@LoginFragment.requireActivity().applicationContext,
-                        MainActivity::class.java)
-                    startActivity(goToMainActivity)
-                    this@LoginFragment.requireActivity().finish()
-
+                    moveToMainActivity()
                 }
             }
 
@@ -130,6 +126,15 @@ class LoginFragment() : Fragment() {
                 ).show()
             }
         })
+    }
+
+    private fun moveToMainActivity() {
+        val goToMainActivity = Intent(
+            this@LoginFragment.requireActivity().applicationContext,
+            MainActivity::class.java
+        )
+        startActivity(goToMainActivity)
+        this@LoginFragment.requireActivity().finish()
     }
 
     private fun saveUserToPref(loginUser: UserPayload) {
