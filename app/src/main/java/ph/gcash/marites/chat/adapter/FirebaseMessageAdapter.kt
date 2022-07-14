@@ -40,6 +40,18 @@ class FirebaseMessageAdapter(private val context: Context,
         return MessageViewHolder(itemBinding)
     }
 
+    override fun setHasStableIds(hasStableIds: Boolean) {
+        super.setHasStableIds(true)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
     override fun onBindViewHolder(holder: MessageViewHolder,
                                   position: Int,
                                   model: MessagePayload

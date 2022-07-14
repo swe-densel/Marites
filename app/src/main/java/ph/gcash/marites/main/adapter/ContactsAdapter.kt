@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -16,21 +15,26 @@ import com.squareup.picasso.Picasso
 import ph.gcash.marites.R
 import ph.gcash.marites.chat.ChatActivity
 import ph.gcash.marites.chat.adapter.loadIntoPicasso
+import ph.gcash.marites.databinding.ItemContactBinding
 import ph.gcash.marites.models.User
 
-class ContactsAdapter(private val userList : ArrayList<User>, private val context: Context): RecyclerView.Adapter<ContactsAdapter.MyViewHolder>() {
+class ContactsAdapter(private val userList : ArrayList<User>, private val context: Context)
+    : RecyclerView.Adapter<ContactsAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_contact,parent,false)
-
-        return MyViewHolder(itemView , context)
+        val itemContactBinding = ItemContactBinding
+            .inflate(
+                LayoutInflater.from(context),
+                parent,
+                false
+            )
+        return MyViewHolder(itemContactBinding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentitem = userList[position]
         holder.bindItem(currentitem)
-
     }
 
     fun Task<Uri>.loadIntoPicasso(imageView: ShapeableImageView) {
@@ -39,24 +43,39 @@ class ContactsAdapter(private val userList : ArrayList<User>, private val contex
         }
     }
 
-    override fun getItemCount(): Int {
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 
+    override fun setHasStableIds(hasStableIds: Boolean) {
+        super.setHasStableIds(true)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemCount(): Int {
         return userList.size
     }
 
-    class MyViewHolder(itemView: View, private val context: Context) : RecyclerView.ViewHolder(itemView){
+    inner class MyViewHolder(private val itemContactBinding: ItemContactBinding)
+        : RecyclerView.ViewHolder(itemContactBinding.root){
 
-        fun bindItem(currentitem: User) {
-            val fullName : TextView = itemView.findViewById(R.id.fullName_item)
-            val userEmail : TextView =  itemView.findViewById(R.id.userEmail_item)
-            val contactsProfile : ShapeableImageView = itemView.findViewById(R.id.contact_image)
+        fun bindItem(currentItem: User) {
+            val fullName : TextView = itemContactBinding.fullNameItem
+            val userEmail : TextView =  itemContactBinding.userEmailItem
+            val contactsPhoto : ShapeableImageView = itemContactBinding.contactImage
 
-            fullName.text = currentitem.name
-            userEmail.text = currentitem.email
+            fullName.text = currentItem.name
+            userEmail.text = currentItem.email
 
-            val userId = currentitem.userUID
-            val imageURL = FirebaseStorage.getInstance().reference.child("users/$userId").downloadUrl
-            imageURL.loadIntoPicasso(contactsProfile)
+            val userId = currentItem.userUID
+            val imageURL = FirebaseStorage
+                .getInstance()
+                .getReference("users/$userId")
+                .downloadUrl
+            imageURL.loadIntoPicasso(contactsPhoto)
 
             itemView.setOnClickListener{
                 val goToChatActivity = Intent(
@@ -65,7 +84,7 @@ class ContactsAdapter(private val userList : ArrayList<User>, private val contex
                 goToChatActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 
                 val bundle = Bundle()
-                bundle.putSerializable("ChatUser",currentitem)
+                bundle.putSerializable("ChatUser",currentItem)
                 goToChatActivity.putExtras(bundle)
 
                 context.startActivity(goToChatActivity)

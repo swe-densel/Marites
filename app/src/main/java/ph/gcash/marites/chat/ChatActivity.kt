@@ -131,8 +131,8 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
             LinearLayoutManager.VERTICAL,
             false
         )
+
         binding.rvMessages.adapter = messageAdapter
-        binding.rvMessages.setHasFixedSize(true)
         return messageAdapter
     }
 
